@@ -77,19 +77,19 @@ C4Container
     title Planning Stage
 
     Container_Boundary(trad, "Traditional") {
-        Container(t1, "User Stories", "", "As a user, I want...")
-        Container(t2, "Functional Specs", "", "System shall...")
-        Container(t3, "NFRs", "", "Performance, security")
-        Container(t4, "Acceptance Criteria", "", "Definition of done")
+        Container(t1, "User Stories", "Doc", "As a user, I want...")
+        Container(t2, "Functional Specs", "Doc", "System shall...")
+        Container(t3, "NFRs", "Doc", "Performance, security")
+        Container(t4, "Acceptance Criteria", "Doc", "Definition of done")
     }
 
     Container_Boundary(ai, "AI Agent (Expanded)") {
-        Container(a1, "User Stories", "", "Same")
-        Container(a2, "Functional Specs", "", "Same")
-        Container(a3, "NFRs", "", "+ Token budgets, cost caps")
-        Container(a4, "Acceptance Criteria", "", "+ Eval rubrics")
-        Container(a5, "Guardrail Specs ✱", "", "Safety boundaries")
-        Container(a6, "Eval Criteria ✱", "", "How to score quality")
+        Container(a1, "User Stories", "Doc", "Same")
+        Container(a2, "Functional Specs", "Doc", "Same")
+        Container(a3, "NFRs", "Doc", "+ Token budgets, cost caps")
+        Container(a4, "Acceptance Criteria", "Doc", "+ Eval rubrics")
+        Container(a5, "Guardrail Specs ✱", "NEW", "Safety boundaries")
+        Container(a6, "Eval Criteria ✱", "NEW", "How to score quality")
     }
 ```
 
@@ -122,18 +122,18 @@ C4Container
     title Design Stage
 
     Container_Boundary(trad, "Traditional") {
-        Container(t1, "System Architecture", "", "Components, services")
-        Container(t2, "Database Schema", "", "Tables, relations")
-        Container(t3, "API Design", "", "REST/GraphQL specs")
-        Container(t4, "Security Design", "", "Auth, encryption")
+        Container(t1, "System Architecture", "Design", "Components, services")
+        Container(t2, "Database Schema", "Design", "Tables, relations")
+        Container(t3, "API Design", "Design", "REST/GraphQL specs")
+        Container(t4, "Security Design", "Design", "Auth, encryption")
     }
 
     Container_Boundary(ai, "AI Agent (Expanded)") {
-        Container(a1, "System Architecture", "", "+ Agent patterns")
-        Container(a2, "Data Design", "", "+ Memory strategy, RAG")
-        Container(a3, "API Design", "", "+ Tool/function schemas")
-        Container(a4, "Security Design", "", "+ Guardrail design")
-        Container(a5, "Prompt Design ✱", "", "System prompts, templates")
+        Container(a1, "System Architecture", "Design", "+ Agent patterns")
+        Container(a2, "Data Design", "Design", "+ Memory strategy, RAG")
+        Container(a3, "API Design", "Design", "+ Tool/function schemas")
+        Container(a4, "Security Design", "Design", "+ Guardrail design")
+        Container(a5, "Prompt Design ✱", "NEW", "System prompts, templates")
     }
 ```
 
@@ -164,18 +164,18 @@ C4Container
     title Development Stage
 
     Container_Boundary(trad, "Traditional") {
-        Container(t1, "Application Code", "", "Business logic")
-        Container(t2, "Unit Tests", "", "Code coverage")
-        Container(t3, "Input Validation", "", "Sanitize inputs")
-        Container(t4, "Logging", "", "Structured logs")
+        Container(t1, "Application Code", "Code", "Business logic")
+        Container(t2, "Unit Tests", "Code", "Code coverage")
+        Container(t3, "Input Validation", "Code", "Sanitize inputs")
+        Container(t4, "Logging", "Code", "Structured logs")
     }
 
     Container_Boundary(ai, "AI Agent (Expanded)") {
-        Container(a1, "Application Code", "", "+ Agent orchestration")
-        Container(a2, "Unit Tests", "", "Same (deterministic parts)")
-        Container(a3, "Validation", "", "+ Output validation (guardrails)")
-        Container(a4, "Observability", "", "+ Reasoning traces")
-        Container(a5, "Prompt Templates ✱", "", "Versioned prompts")
+        Container(a1, "Application Code", "Code", "+ Agent orchestration")
+        Container(a2, "Unit Tests", "Code", "Same (deterministic parts)")
+        Container(a3, "Validation", "Code", "+ Output validation (guardrails)")
+        Container(a4, "Observability", "Code", "+ Reasoning traces")
+        Container(a5, "Prompt Templates ✱", "NEW", "Versioned prompts")
     }
 ```
 
@@ -206,25 +206,22 @@ C4Container
     title Testing Stage - THE KEY EVOLUTION
 
     Container_Boundary(trad, "Traditional") {
-        Container(t1, "Unit Tests", "", "assert(expected == actual)")
-        Container(t2, "Integration Tests", "", "Pass/fail E2E")
-        Container(t3, "Performance Tests", "", "Latency thresholds")
-        Container(t4, "Security Tests", "", "Pen testing")
-        Container(t5, "Manual QA", "", "Exploratory")
+        Container(t1, "Unit Tests", "Test", "assert(expected == actual)")
+        Container(t2, "Integration Tests", "Test", "Pass/fail E2E")
+        Container(t3, "Performance Tests", "Test", "Latency thresholds")
+        Container(t4, "Security Tests", "Test", "Pen testing")
+        Container(t5, "Manual QA", "Human", "Exploratory")
     }
 
     Container_Boundary(ai, "AI Agent (Evolved)") {
-        Container(a1, "Unit Tests", "", "Same (deterministic parts)")
-        Container(a2, "Integration Tests", "", "Same")
-        Container(a3, "Performance Tests", "", "+ Token efficiency")
-        Container(a4, "Security Tests", "", "+ Red teaming, jailbreaks")
-        Container(a5, "Manual QA", "", "Scaled human evaluation")
-        Container(a6, "Behavioral Evals ★", "", "Fuzzy scoring (0-100)")
-        Container(a7, "Benchmarks ★", "", "MMLU, HumanEval")
+        Container(a1, "Unit Tests", "Test", "Same (deterministic parts)")
+        Container(a2, "Integration Tests", "Test", "Same")
+        Container(a3, "Performance Tests", "Test", "+ Token efficiency")
+        Container(a4, "Security Tests", "Test", "+ Red teaming, jailbreaks")
+        Container(a5, "Manual QA", "Human", "Scaled human evaluation")
+        Container(a6, "Behavioral Evals ★", "Eval", "Fuzzy scoring 0-100")
+        Container(a7, "Benchmarks ★", "Eval", "MMLU, HumanEval")
     }
-
-    style a6 fill:#fff3e0,stroke:#e65100
-    style a7 fill:#fff3e0,stroke:#e65100
 ```
 
 | Aspect | Traditional | AI Agent | Change |
@@ -266,20 +263,20 @@ C4Container
     title Deployment Stage
 
     Container_Boundary(trad, "Traditional") {
-        Container(t1, "CI/CD Pipeline", "", "Build, test, deploy")
-        Container(t2, "Artifact Registry", "", "Container images")
-        Container(t3, "Environments", "", "Dev, staging, prod")
-        Container(t4, "Feature Flags", "", "Gradual rollout")
-        Container(t5, "Rollback", "", "Error-triggered")
+        Container(t1, "CI/CD Pipeline", "Infra", "Build, test, deploy")
+        Container(t2, "Artifact Registry", "Infra", "Container images")
+        Container(t3, "Environments", "Infra", "Dev, staging, prod")
+        Container(t4, "Feature Flags", "Infra", "Gradual rollout")
+        Container(t5, "Rollback", "Infra", "Error-triggered")
     }
 
     Container_Boundary(ai, "AI Agent (Expanded)") {
-        Container(a1, "CI/CD Pipeline", "", "+ Eval runs")
-        Container(a2, "Artifact Registry", "", "+ Prompt versions, model refs")
-        Container(a3, "Environments", "", "Same")
-        Container(a4, "Feature Flags", "", "+ Model/prompt A/B tests")
-        Container(a5, "Rollback", "", "+ Quality-triggered")
-        Container(a6, "Eval Gates ✱", "", "Score thresholds")
+        Container(a1, "CI/CD Pipeline", "Infra", "+ Eval runs")
+        Container(a2, "Artifact Registry", "Infra", "+ Prompt versions, model refs")
+        Container(a3, "Environments", "Infra", "Same")
+        Container(a4, "Feature Flags", "Infra", "+ Model/prompt A/B tests")
+        Container(a5, "Rollback", "Infra", "+ Quality-triggered")
+        Container(a6, "Eval Gates ✱", "NEW", "Score thresholds")
     }
 ```
 
@@ -311,19 +308,17 @@ C4Container
     title Operations Stage
 
     Container_Boundary(trad, "Traditional Operations") {
-        Container(t1, "Monitoring", "", "Logs, metrics, APM")
-        Container(t2, "Maintenance", "", "Bug fixes, patches")
-        Container(t3, "Improvements", "", "Features, refactoring")
+        Container(t1, "Monitoring", "Ops", "Logs, metrics, APM")
+        Container(t2, "Maintenance", "Ops", "Bug fixes, patches")
+        Container(t3, "Improvements", "Ops", "Features, refactoring")
     }
 
     Container_Boundary(ai, "AI Agent Operations (Expanded)") {
-        Container(a1, "Observability", "", "+ Reasoning traces, token costs")
-        Container(a2, "Quality Control ✱", "", "Hallucination, safety monitoring")
-        Container(a3, "Maintenance", "", "+ Prompt fixes")
-        Container(a4, "Improvements", "", "+ Prompt optimization, fine-tuning")
+        Container(a1, "Observability", "Ops", "+ Reasoning traces, token costs")
+        Container(a2, "Quality Control ✱", "NEW", "Hallucination, safety monitoring")
+        Container(a3, "Maintenance", "Ops", "+ Prompt fixes")
+        Container(a4, "Improvements", "Ops", "+ Prompt optimization, fine-tuning")
     }
-
-    style a2 fill:#e8f5e9,stroke:#2e7d32
 ```
 
 ### Observability (Monitoring expanded)

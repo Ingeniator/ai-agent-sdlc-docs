@@ -118,6 +118,14 @@ C4Context
 | | Surge AI | Human annotation | surgehq.ai |
 | | Labelbox | Labeling platform | labelbox.com |
 | | Argilla | Open-source annotation | argilla.io |
+| **Eval Dataset Management** | Braintrust | Built-in dataset versioning + eval runner | braintrust.dev |
+| | LangSmith Datasets | Dataset store with test case management | smith.langchain.com |
+| | Humanloop | Dataset management + prompt evals | humanloop.com |
+| | DVC | Git-based data versioning | dvc.org |
+| | Hugging Face Datasets | Dataset hosting, loading, sharing | huggingface.co/docs/datasets |
+| | Promptfoo | File-based (YAML/JSON in Git) | promptfoo.dev |
+
+> **Cross-cutting note**: Eval datasets have a lifecycle. They start here (Stage 4) as curated golden sets consumed by eval runners, but are continuously enriched in [Stage 8: Iteration](#stage-8-iteration) where production failures and human feedback become new test cases. See [Dataset Curation Pipeline](#dataset-curation-pipeline) below.
 
 ---
 
@@ -192,12 +200,45 @@ C4Context
 | | Anyscale | Distributed fine-tuning | anyscale.com |
 | **RLHF/DPO** | Hugging Face TRL | RLHF library | huggingface.co/docs/trl |
 | | OpenRLHF | Distributed RLHF | github.com/OpenRLHF |
-| **Dataset Management** | Argilla | Data labeling | argilla.io |
+| **Dataset Management** | Argilla | Data labeling + annotation | argilla.io |
 | | Label Studio | Open-source labeling | labelstud.io |
-| | Lilac | Dataset exploration | lilacml.com |
-| | Cleanlab | Data quality | cleanlab.ai |
+| | Lilac | Dataset exploration + curation | lilacml.com |
+| | Cleanlab | Data quality assessment | cleanlab.ai |
+| | DVC | Dataset versioning (Git-based) | dvc.org |
+| | Hugging Face Datasets | Dataset hosting + sharing | huggingface.co/docs/datasets |
 | **Experiment Tracking** | Weights & Biases | ML experiments | wandb.ai |
 | | MLflow | Open-source tracking | mlflow.org |
+
+> **Cross-cutting note**: Dataset management here focuses on curating **training data** from production failures. This feeds back to [Stage 4: Evaluation](#stage-4-evaluation) — production failures become eval test cases, human corrections become golden answers. See [Dataset Curation Pipeline](#dataset-curation-pipeline) below.
+
+---
+
+### Dataset Curation Pipeline
+
+The lifecycle of an eval dataset spans Stage 4 (consumption) and Stage 8 (curation):
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   Dataset Curation Pipeline                      │
+│                                                                  │
+│  Production ──→ Traces ──→ Failure    ──→ Human      ──→ Golden  │
+│  Traffic        (Stage 6)   Detection      Review        Dataset │
+│                             (Stage 7)      (Stage 8)    (Stage 4)│
+│                                                                  │
+│  Tools:         LangFuse    Braintrust     Argilla      Braintrust│
+│                 LangSmith   Custom rules   Label Studio LangSmith│
+│                 Arize       LLM-as-Judge   Lilac        HF Datasets│
+│                                            Cleanlab     DVC      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+| Phase | What Happens | Key Tools |
+|-------|--------------|-----------|
+| **Collect** | Production traces captured with inputs/outputs | LangFuse, LangSmith, Arize |
+| **Detect** | Flag low-quality outputs, hallucinations, failures | Braintrust, custom rules, LLM-as-Judge |
+| **Curate** | Human review, label corrections, quality filtering | Argilla, Label Studio, Lilac, Cleanlab |
+| **Version** | Store as versioned eval dataset, track changes | DVC, HF Datasets, Braintrust, LangSmith |
+| **Evaluate** | Run automated evals against golden datasets | Promptfoo, Braintrust, DeepEval |
 
 ---
 

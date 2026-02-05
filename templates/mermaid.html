@@ -1,0 +1,36 @@
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+  // Convert pandoc mermaid code blocks: <pre class="mermaid"><code>...</code></pre>
+  document.querySelectorAll('pre.mermaid').forEach((pre) => {
+    const code = pre.querySelector('code');
+    if (code) {
+      const div = document.createElement('div');
+      div.className = 'mermaid';
+      div.textContent = code.textContent;
+      pre.replaceWith(div);
+    }
+  });
+
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'neutral',
+    securityLevel: 'loose',
+    c4: {
+      diagramMarginY: 20
+    }
+  });
+</script>
+<style>
+  .mermaid {
+    background: #fafafa;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

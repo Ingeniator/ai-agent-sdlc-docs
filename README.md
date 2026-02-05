@@ -19,7 +19,7 @@ Both SDLCs share the same core cycle:
 
 ```mermaid
 flowchart TB
-    subgraph cycle["Core SDLC Cycle (Both)"]
+    subgraph cycle["Core SDLC Cycle - Both"]
         Planning --> Design --> Development --> Testing --> Deployment --> Operations
         Operations -.->|Continuous Iteration| Planning
     end
@@ -52,10 +52,10 @@ flowchart TB
 flowchart TB
     subgraph AI["AI Agent SDLC"]
         P2[Planning] --> D2[Design] --> DEV2[Development]
-        DEV2 --> T2["Testing (Evaluation)"] --> DEP2[Deployment] --> O2[Operations]
+        DEV2 --> T2["Testing / Evaluation"] --> DEP2[Deployment] --> O2[Operations]
         O2 -.->|Iteration| P2
 
-        subgraph ops2["Operations (Expanded)"]
+        subgraph ops2["Operations - Expanded"]
             O2a[Observability]
             O2b["Quality Control ✱"]
             O2c[Improvements]

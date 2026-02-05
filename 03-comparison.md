@@ -33,7 +33,7 @@ C4Context
         System(a1, "Planning", "+ Guardrails, eval criteria")
         System(a2, "Design", "+ Prompts, memory, tools")
         System(a3, "Development", "+ Prompts, tracing")
-        System(a4, "Testing", "+ Fuzzy scoring (Evals)")
+        System(a4, "Testing", "+ Fuzzy scoring via Evals")
         System(a5, "Deployment", "+ Prompt versions, eval gates")
         System(a6, "Operations", "+ Quality Control substage")
     }
@@ -83,7 +83,7 @@ C4Container
         Container(t4, "Acceptance Criteria", "Doc", "Definition of done")
     }
 
-    Container_Boundary(ai, "AI Agent (Expanded)") {
+    Container_Boundary(ai, "AI Agent - Expanded") {
         Container(a1, "User Stories", "Doc", "Same")
         Container(a2, "Functional Specs", "Doc", "Same")
         Container(a3, "NFRs", "Doc", "+ Token budgets, cost caps")
@@ -128,7 +128,7 @@ C4Container
         Container(t4, "Security Design", "Design", "Auth, encryption")
     }
 
-    Container_Boundary(ai, "AI Agent (Expanded)") {
+    Container_Boundary(ai, "AI Agent - Expanded") {
         Container(a1, "System Architecture", "Design", "+ Agent patterns")
         Container(a2, "Data Design", "Design", "+ Memory strategy, RAG")
         Container(a3, "API Design", "Design", "+ Tool/function schemas")
@@ -170,10 +170,10 @@ C4Container
         Container(t4, "Logging", "Code", "Structured logs")
     }
 
-    Container_Boundary(ai, "AI Agent (Expanded)") {
+    Container_Boundary(ai, "AI Agent - Expanded") {
         Container(a1, "Application Code", "Code", "+ Agent orchestration")
-        Container(a2, "Unit Tests", "Code", "Same (deterministic parts)")
-        Container(a3, "Validation", "Code", "+ Output validation (guardrails)")
+        Container(a2, "Unit Tests", "Code", "Same - deterministic parts")
+        Container(a3, "Validation", "Code", "+ Output validation via guardrails")
         Container(a4, "Observability", "Code", "+ Reasoning traces")
         Container(a5, "Prompt Templates ✱", "NEW", "Versioned prompts")
     }
@@ -206,15 +206,15 @@ C4Container
     title Testing Stage - THE KEY EVOLUTION
 
     Container_Boundary(trad, "Traditional") {
-        Container(t1, "Unit Tests", "Test", "assert(expected == actual)")
+        Container(t1, "Unit Tests", "Test", "assert expected == actual")
         Container(t2, "Integration Tests", "Test", "Pass/fail E2E")
         Container(t3, "Performance Tests", "Test", "Latency thresholds")
         Container(t4, "Security Tests", "Test", "Pen testing")
         Container(t5, "Manual QA", "Human", "Exploratory")
     }
 
-    Container_Boundary(ai, "AI Agent (Evolved)") {
-        Container(a1, "Unit Tests", "Test", "Same (deterministic parts)")
+    Container_Boundary(ai, "AI Agent - Evolved") {
+        Container(a1, "Unit Tests", "Test", "Same - deterministic parts")
         Container(a2, "Integration Tests", "Test", "Same")
         Container(a3, "Performance Tests", "Test", "+ Token efficiency")
         Container(a4, "Security Tests", "Test", "+ Red teaming, jailbreaks")
@@ -226,13 +226,14 @@ C4Container
 
 | Aspect | Traditional | AI Agent | Change |
 |--------|-------------|----------|--------|
-| Unit tests | Pass/fail | Same (deterministic parts) | Same |
+| Unit tests | Pass/fail | Same - deterministic parts | Same |
 | Integration tests | Pass/fail | Same | Same |
 | Performance tests | Latency thresholds | + Token efficiency | Expand |
 | Security tests | Pen testing | + Red teaming, jailbreaks | Expand |
 | Manual QA | Exploratory | Scaled human evaluation | Expand |
 | **New** | - | Behavioral evals (scoring) | ★ Evolve |
 | **New** | - | Benchmarks | ★ Add |
+| **New** | - | Eval dataset management | ★ Add |
 
 ### The Core Shift
 
@@ -249,6 +250,7 @@ AI Agent:     score(output, criteria) → 0-100  → Quality score
 - **Benchmarks**: MMLU, HumanEval, MT-Bench for baseline
 - **Red teaming**: Test for jailbreaks, prompt injection
 - **Regression tracking**: Monitor score changes over time
+- **Eval dataset management**: Version and curate golden datasets (input/expected output pairs, scoring rubrics) that feed automated evals — continuously enriched from production failures (see Stage 6)
 
 ---
 
@@ -270,7 +272,7 @@ C4Container
         Container(t5, "Rollback", "Infra", "Error-triggered")
     }
 
-    Container_Boundary(ai, "AI Agent (Expanded)") {
+    Container_Boundary(ai, "AI Agent - Expanded") {
         Container(a1, "CI/CD Pipeline", "Infra", "+ Eval runs")
         Container(a2, "Artifact Registry", "Infra", "+ Prompt versions, model refs")
         Container(a3, "Environments", "Infra", "Same")
@@ -313,7 +315,7 @@ C4Container
         Container(t3, "Improvements", "Ops", "Features, refactoring")
     }
 
-    Container_Boundary(ai, "AI Agent Operations (Expanded)") {
+    Container_Boundary(ai, "AI Agent Operations - Expanded") {
         Container(a1, "Observability", "Ops", "+ Reasoning traces, token costs")
         Container(a2, "Quality Control ✱", "NEW", "Hallucination, safety monitoring")
         Container(a3, "Maintenance", "Ops", "+ Prompt fixes")
@@ -342,6 +344,7 @@ This is a **new substage** within Operations, focused on AI-specific failure mod
 | Safety monitoring | Content policy violations |
 | Human feedback | Collect ratings, corrections |
 | Drift detection | Quality changes over time |
+| Dataset curation | Production failures → new eval test cases |
 
 ### Maintenance & Improvements (Expanded)
 
@@ -350,7 +353,7 @@ This is a **new substage** within Operations, focused on AI-specific failure mod
 | Quick fixes | Code patches | + Prompt adjustments | Expand |
 | Bug fixes | Code changes | + Prompt refinement | Expand |
 | Improvements | New features | + Fine-tuning, RLHF | Expand |
-| Data | Test data | + Training data curation | Expand |
+| Data | Test data | + Eval dataset curation, training data | Expand |
 
 ---
 
@@ -361,7 +364,7 @@ This is a **new substage** within Operations, focused on AI-specific failure mod
 | Planning | Expand | Requirements, specs | + Guardrails, eval criteria |
 | Design | Expand | Architecture, APIs | + Prompts, memory, tools |
 | Development | Expand | Code, tests | + Prompt templates, tracing |
-| Testing | **Evolve** | Pass/fail | + **Fuzzy scoring (evals)** |
+| Testing | **Evolve** | Pass/fail | + **Fuzzy scoring (evals)**, eval datasets |
 | Deployment | Expand | CI/CD, flags | + Prompt versions, eval gates |
 | Operations | Expand | Monitor, maintain | + **Quality Control substage** |
 
@@ -379,6 +382,7 @@ This is a **new substage** within Operations, focused on AI-specific failure mod
 | Behavioral evals | Testing | - | Scoring, not pass/fail |
 | LLM-as-Judge | Testing | - | LLM evaluates LLM |
 | Red teaming | Testing | Pen testing | + Jailbreaks, prompt injection |
+| Eval datasets | Testing ↔ Operations | Test fixtures | Versioned golden sets, curated from production |
 | Eval gates | Deployment | Test gates | Score thresholds |
 | Quality Control | Operations | - | New substage |
 | Hallucination detection | Operations | - | New failure mode |
@@ -401,18 +405,20 @@ This is a **new substage** within Operations, focused on AI-specific failure mod
 |-------------------|-----------|
 | Requirements docs | + Guardrail specs, eval criteria |
 | Architecture diagrams | + Agent patterns, prompt design |
-| Input validation | + Output validation (guardrails) |
+| Input validation | + Output validation via guardrails |
 | Logging | + Reasoning traces |
 | Performance tests | + Token efficiency |
 | Security tests | + Red teaming |
 | Artifact registry | + Prompt versions |
 | Feature flags | + Model A/B testing |
 | Monitoring | + Token costs, quality scores |
+| Test data / fixtures | + Eval dataset management, golden sets |
 
 ### What You Add (New)
 - Prompt templates as versioned artifacts
 - Behavioral evals with scoring
 - LLM-as-Judge evaluation
+- Eval dataset management (golden sets, versioning, curation pipeline)
 - Quality Control monitoring
 - Human feedback collection
 - Fine-tuning/RLHF pipelines (if needed)

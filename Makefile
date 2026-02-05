@@ -10,7 +10,7 @@ PANDOC_OPTS := --standalone \
 	--toc-depth=2 \
 	--metadata title="AI Agent SDLC" \
 	--css=style.css \
-	--highlight-style=github
+	--include-in-header=templates/mermaid.html
 
 .PHONY: all clean serve check-deps
 
@@ -24,9 +24,11 @@ $(BUILD_DIR):
 
 $(BUILD_DIR)/%.html: %.md
 	pandoc $(PANDOC_OPTS) -o $@ $<
+	sed -i '' 's/\.md"/\.html"/g' $@
 
 $(BUILD_DIR)/index.html: README.md
 	pandoc $(PANDOC_OPTS) --metadata title="AI Agent SDLC - Overview" -o $@ $<
+	sed -i '' 's/\.md"/\.html"/g' $@
 
 $(BUILD_DIR)/style.css:
 	@echo '/* AI Agent SDLC Documentation Styles */' > $@

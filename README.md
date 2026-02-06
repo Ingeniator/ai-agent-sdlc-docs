@@ -10,7 +10,8 @@ sdlc/
 ├── 01-traditional-sdlc.md       # Traditional SDLC stages & tools
 ├── 02-ai-agent-sdlc.md          # AI Agent SDLC stages & tools
 ├── 03-comparison.md             # Side-by-side comparison
-└── 04-tools-landscape.md        # Tool ecosystem reference
+├── 04-tools-landscape.md        # Tool ecosystem reference
+└── 05-dataset-management.md     # Eval dataset management deep dive
 ```
 
 ## Quick Overview
@@ -166,3 +167,4 @@ The AI Agent SDLC is an **evolution** of traditional SDLC, not a replacement. Te
 2. **[AI Agent SDLC](02-ai-agent-sdlc.md)** - See what expands/evolves
 3. **[Comparison](03-comparison.md)** - Detailed stage-by-stage analysis
 4. **[Tools Landscape](04-tools-landscape.md)** - Tool reference guide
+5. **[Dataset Management](05-dataset-management.md)** - Eval dataset management deep dive

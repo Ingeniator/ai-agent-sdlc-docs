@@ -320,4 +320,5 @@ The lifecycle of an eval dataset spans Stage 4 (consumption) and Stage 8 (curati
 
 ---
 
+**Next**: [Dataset Management →](05-dataset-management.md)
 **Back to**: [README](README.md)
